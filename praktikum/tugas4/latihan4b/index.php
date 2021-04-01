@@ -37,9 +37,8 @@ button {
 </style>
 <body>
     <?php
-    $conn = mysqli_connect("localhost", "root", "");
-    mysqli_select_db($conn, "pw2021_203040109");
-    $result = mysqli_query($conn, "SELECT * FROM latihan4a");
+    require 'php/functions.php';
+    $result = query("SELECT * FROM latihan4a");
     
 ?>
 
@@ -57,19 +56,21 @@ button {
       <th scope="col">Price</th>
       <th scope="col">Size</th>
     </tr>
-    <?php while($row = mysqli_fetch_assoc($result)) : ?>
+    <?php $i = 1 ?>
+    <?php foreach ($result as $row) : ?>
         <tr>
             <td><?php echo $row["No"]; ?></td>
-  			    <td><img src="assets/img/<?= $row["Picture"]; ?>" width="100px"></td>
+            <td><img src="assets/img/<?= $row["Picture"]; ?>" width="100px"></td>
             <td><?php echo $row["Name"]; ?><br></td>
             <td><?php echo $row["Description"]; ?><br></td>
             <td><?php echo $row["Price"]; ?><br></td>
             <td><?php  echo "<button type='button' class='btn btn-danger btn-sm' >". $row["Size"] ."</button>" ?>
 				 </td>
+         <?php $i++ ?>
         </tr>   
       </tbody>
   </thead>
-  <?php endwhile ;?>
+  <?php endforeach; ?>
 </table>
 </body>
 </html>
